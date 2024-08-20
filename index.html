@@ -44,7 +44,7 @@
         }
 
         .slot-machine {
-            width: 300px;
+            width: 600px;
             text-align: center;
             margin: 0 auto;
         }
@@ -52,29 +52,22 @@
         .reels {
             display: flex;
             justify-content: center;
-            margin-bottom: 20px;
             overflow: hidden;
-            position: relative;
-            height: 180px; /* Adjust based on the height of the reels */
         }
 
         .reel-container {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 600px; /* Height enough to include all symbols */
+            margin: 0 5px;
         }
 
         .reel {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
+            width: 100px;
+            height: 100px;
             border: 2px solid #ddd;
-            margin: 0 5px;
-            font-size: 24px;
-            line-height: 60px;
+            margin-bottom: 5px;
+            font-size: 36px;
+            line-height: 100px;
             background-color: #fff;
             text-align: center;
         }
@@ -96,10 +89,10 @@
 
         @keyframes spin {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-300px); } /* Adjust to match the height of the container */
+            100% { transform: translateY(-300%); } /* Adjust to match the number of symbols */
         }
 
-        .spinning {
+        .reel-container.spin .reel {
             animation: spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
         }
     </style>
@@ -130,7 +123,25 @@
         <section id="slot-machine">
             <div class="slot-machine">
                 <div class="reels">
-                    <div class="reel-container">
+                    <div class="reel-container" id="reel1">
+                        <div class="reel">🍒</div>
+                        <div class="reel">🍋</div>
+                        <div class="reel">🍊</div>
+                        <div class="reel">🍉</div>
+                        <div class="reel">🍇</div>
+                        <div class="reel">⭐</div>
+                        <div class="reel">💎</div>
+                    </div>
+                    <div class="reel-container" id="reel2">
+                        <div class="reel">🍒</div>
+                        <div class="reel">🍋</div>
+                        <div class="reel">🍊</div>
+                        <div class="reel">🍉</div>
+                        <div class="reel">🍇</div>
+                        <div class="reel">⭐</div>
+                        <div class="reel">💎</div>
+                    </div>
+                    <div class="reel-container" id="reel3">
                         <div class="reel">🍒</div>
                         <div class="reel">🍋</div>
                         <div class="reel">🍊</div>
@@ -146,34 +157,38 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Hraymo. All rights reserved.</p>
-    </footer>
-
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
 
         function spin() {
-            const reelContainer = document.querySelector('.reel-container');
-            // Reset animation
-            reelContainer.classList.remove('spinning');
-            void reelContainer.offsetWidth; // Trigger reflow
-            reelContainer.classList.add('spinning');
+            const reelContainers = document.querySelectorAll('.reel-container');
+            reelContainers.forEach(container => {
+                // Reset animation
+                container.style.animation = 'none';
+                container.offsetHeight; // Trigger reflow
+                container.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
+            });
 
             setTimeout(() => {
-                reelContainer.classList.remove('spinning');
-                const reels = document.querySelectorAll('.reel');
-                reels.forEach(reel => {
-                    reel.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                reelContainers.forEach(container => {
+                    const reels = container.querySelectorAll('.reel');
+                    reels.forEach(reel => {
+                        reel.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                    });
                 });
 
-                // Check for a win (for demonstration purposes, checking the first three reels)
-                if (reels[0].innerText === reels[1].innerText && reels[1].innerText === reels[2].innerText) {
+                const reels1 = reelContainers[0].querySelectorAll('.reel');
+                const reels2 = reelContainers[1].querySelectorAll('.reel');
+                const reels3 = reelContainers[2].querySelectorAll('.reel');
+
+                if (reels1[0].innerText === reels1[1].innerText && reels1[1].innerText === reels1[2].innerText &&
+                    reels2[0].innerText === reels2[1].innerText && reels2[1].innerText === reels2[2].innerText &&
+                    reels3[0].innerText === reels3[1].innerText && reels3[1].innerText === reels3[2].innerText) {
                     document.getElementById('result').innerText = "🎉 You win! 🎉";
                 } else {
                     document.getElementById('result').innerText = "Try again!";
                 }
-            }, 1500); // Matches the duration of the animation
+            }, 1500);
         }
     </script>
 </body>
