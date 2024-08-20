@@ -1,24 +1,27 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Site</title>
-    <style>
-        .buy-button {
-            background-color: orange;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-    </style>
+    <title>Hraymo - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div class="container">
-        <img src="{{ url_for('static', filename='image.jpg') }}" alt="Your Image">
-        <button class="buy-button">Buy</button>
-    </div>
+    <header>
+        <h1>Welcome to Hraymo</h1>
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('about') }}">About Us</a>
+            <a href="{{ url_for('careers') }}">Careers</a>
+            <a href="{{ url_for('contact') }}">Contact Us</a>
+        </nav>
+    </header>
+    <main>
+        <h2>Your Trusted Partner in Innovation</h2>
+        <p>At Hraymo, we specialize in cutting-edge solutions that drive success.</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Hraymo. All rights reserved.</p>
+    </footer>
 </body>
 </html>
