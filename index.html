@@ -61,10 +61,8 @@
         .reel-container {
             display: flex;
             flex-direction: column;
-            height: 80px; /* Высота барабана */
+            height: 100%;
             width: 60px; /* Ширина барабана */
-            overflow: hidden; /* Скрыть часть барабана, выходящую за границы */
-            position: relative;
         }
 
         .reel {
@@ -76,8 +74,7 @@
             background-color: #fff;
             font-size: 24px;
             text-align: center;
-            position: absolute;
-            top: 0;
+            transition: transform 1.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
 
         .spin-button {
@@ -93,11 +90,6 @@
 
         .spin-button:hover {
             background-color: #218838;
-        }
-
-        @keyframes spin {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-240px); } /* Переезд всех символов для полного цикла */
         }
     </style>
 </head>
@@ -163,43 +155,57 @@
 
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
+        let currentSymbols = [];
 
         function spin() {
             const reels = document.querySelectorAll('.reel-container');
             reels.forEach((reelContainer) => {
-                // Prepare for spin animation
-                reelContainer.style.animation = 'none';
-                reelContainer.offsetHeight; // Trigger reflow
+                const reels = reelContainer.querySelectorAll('.reel');
+                const randomStart = Math.floor(Math.random() * (reels.length - 3));
+
+                // Set the starting position of the reels
+                reels.forEach((reel, index) => {
+                    reel.style.transform = `translateY(${-randomStart * 80}px)`; // Adjust translateY based on reel height
+                });
+
+                // Trigger the spin animation
                 reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
-
-                // Randomize symbol positions after spinning
-                setTimeout(() => {
-                    const reels = reelContainer.querySelectorAll('.reel');
-                    const randomStart = Math.floor(Math.random() * symbols.length);
-                    reels.forEach((reel, index) => {
-                        reel.innerText = symbols[(index + randomStart) % symbols.length];
-                    });
-
-                    // Ensure the last symbol of the visible part is shown correctly
-                    const visibleReel = reels[0];
-                    reelContainer.style.top = `-${visibleReel.offsetHeight}px`;
-                }, 1500);
             });
 
-            // Determine result after spinning
             setTimeout(() => {
                 const results = [];
-                document.querySelectorAll('.reel-container').forEach((reelContainer) => {
+                document.querySelectorAll('.reel-container').forEach((reelContainer, index) => {
                     const visibleReel = reelContainer.querySelector('.reel');
                     results.push(visibleReel.innerText);
                 });
 
+                // Check if all visible symbols are the same
                 if (results.every(symbol => symbol === results[0])) {
                     document.getElementById('result').innerText = "🎉 You win! 🎉";
                 } else {
                     document.getElementById('result').innerText = "Try again!";
                 }
+
+                // Update the symbols after spinning
+                updateReels();
             }, 1500); // Duration of spin animation
+        }
+
+        function updateReels() {
+            document.querySelectorAll('.reel-container').forEach((reelContainer) => {
+                const reels = reelContainer.querySelectorAll('.reel');
+                const randomStart = Math.floor(Math.random() * symbols.length);
+
+                // Update each reel with a random symbol
+                reels.forEach((reel, index) => {
+                    reel.innerText = symbols[(index + randomStart) % symbols.length];
+                });
+
+                // Reset the reel container animation
+                reelContainer.style.animation = 'none';
+                reelContainer.offsetHeight; // Trigger reflow
+                reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
+            });
         }
     </script>
 </body>
