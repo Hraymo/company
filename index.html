@@ -5,110 +5,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hraymo</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            background-color: #f4f4f4;
-        }
-        
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #444;
-            padding: 10px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-        }
-
-        nav a:hover {
-            text-decoration: underline;
-        }
-
-        section {
-            padding: 40px 20px;
-            max-width: 1000px;
-            margin: 0 auto;
-            background-color: #fff;
-            margin-bottom: 20px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-
-        h2 {
-            text-align: center;
-            color: #333;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #666;
-        }
-
-        footer {
-            background-color: #333;
-            color: #fff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-    </style>
 </head>
 <body>
     <header>
         <h1>Welcome to Hraymo</h1>
     </header>
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>
-            Hraymo is a leading innovator in the iGaming industry, dedicated to creating cutting-edge solutions that our players love. Our mission is to drive progress through technology, making the world a more connected, efficient, and enjoyable place.
-        </p>
-        <p>
-           We are committed to excellence in everything we do.
-        </p>
-    </section>
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Hraymo is a leading company in innovative solutions, dedicated to transforming industries through our unique approaches and cutting-edge technology.</p>
+        </section>
 
-    <section id="careers">
-        <h2>Careers</h2>
-        <p>
-            At Hraymo, we believe that our employees are our greatest asset. We are always on the lookout for talented individuals who are eager to join a dynamic and fast-paced environment. If you are passionate about technology and innovation, we want to hear from you!
-        </p>
-        <p>
-            Explore our current job openings and discover how you can become a part of the Hraymo family. We offer competitive salaries, comprehensive benefits, and opportunities for professional growth.
-        </p>
-                    <strong>Email:</strong> hr@hraymo.com<br>
-        </p>
-    </section>
+        <section id="careers">
+            <h2>Careers</h2>
+            <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
+        </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <p>
-            Do you have any questions or inquiries? We would love to hear from you! Reach out to us via the following channels:
-        </p>
-        <p>
-            <strong>Email:</strong> contact@hraymo.com<br>
-        </p>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: info@hraymo.com</p>
+            <p>Phone: +1 123 456 7890</p>
+            <p>Address: 123 Innovation Drive, Tech City, Country</p>
+        </section>
+    </main>
+
+    <!-- Интерактивный слот -->
+    <section id="slot-machine">
+        <h2>Try Your Luck!</h2>
+        <div class="slot-machine">
+            <div class="reels">
+                <div class="reel" id="reel1">🍒</div>
+                <div class="reel" id="reel2">🍋</div>
+                <div class="reel" id="reel3">🍊</div>
+            </div>
+            <button class="spin-button" onclick="spin()">Spin</button>
+            <p id="result"></p>
+        </div>
     </section>
 
     <footer>
         <p>&copy; 2024 Hraymo. All rights reserved.</p>
     </footer>
+
+    <!-- Стили и скрипты для слота -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        section {
+            margin-bottom: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: white;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .slot-machine {
+            width: 300px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .reel {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ddd;
+            margin: 0 5px;
+            font-size: 24px;
+            line-height: 60px;
+            background-color: #fff;
+        }
+
+        .spin-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .spin-button:hover {
+            background-color: #218838;
+        }
+    </style>
+
+    <script>
+        const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
+
+        function spin() {
+            const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
+            const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
+            const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
+
+            document.getElementById('reel1').innerText = reel1;
+            document.getElementById('reel2').innerText = reel2;
+            document.getElementById('reel3').innerText = reel3;
+
+            if (reel1 === reel2 && reel2 === reel3) {
+                document.getElementById('result').innerText = "🎉 You win! 🎉";
+            } else {
+                document.getElementById('result').innerText = "Try again!";
+            }
+        }
+    </script>
 </body>
 </html>
