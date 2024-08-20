@@ -5,6 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hraymo</title>
     <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Hraymo</h1>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>At Hraymo, we create games for the global gaming industry with our unique approach to product development.
+            Our goal is to provide users with positive emotions and unforgettable experiences.</p>
+        </section>
+
+        <section id="careers">
+            <h2>Careers</h2>
+            <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
+            <p>Email: hr@hraymo.com</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@hraymo.com</p>
+
+        </section>
+    </main>
+
+    <!-- Интерактивный слот -->
+    <section id="slot-machine">
+        <div class="slot-machine">
+            <div class="reels">
+                <div class="reel" id="reel1">🍒</div>
+                <div class="reel" id="reel2">🍋</div>
+                <div class="reel" id="reel3">🍊</div>
+            </div>
+            <button class="spin-button" onclick="spin()">Spin</button>
+            <p id="result"></p>
+        </div>
+    </section>
+
+    <!-- Стили и скрипты для слота -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,6 +59,21 @@
             color: white;
             padding: 10px 0;
             text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
         }
 
         main {
@@ -44,53 +99,20 @@
         }
 
         .slot-machine {
-            width: 400px;
+            width: 300px;
             text-align: center;
             margin: 0 auto;
         }
 
-        .reels {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            overflow: hidden;
-            position: relative;
-            height: 80px; /* Высота для отображения только одного символа */
-        }
-
-        .reel-container {
-            display: flex;
-            flex-direction: column;
-            height: 80px; /* Высота барабана */
-            width: 60px; /* Ширина барабана */
-            overflow: hidden;
-            position: relative;
-        }
-
         .reel {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80px; /* Высота барабана */
+            display: inline-block;
+            width: 60px;
+            height: 60px;
             border: 2px solid #ddd;
-            background-color: #fff;
+            margin: 0 5px;
             font-size: 24px;
-            text-align: center;
-            position: absolute;
-            top: 0;
-        }
-
-        .reel-container {
-            animation: spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) infinite;
-        }
-
-        @keyframes spin {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(-560px); /* Высота одного барабана * Количество символов */
-            }
+            line-height: 60px;
+            background-color: #fff;
         }
 
         .spin-button {
@@ -108,138 +130,26 @@
             background-color: #218838;
         }
     </style>
-</head>
-<body>
-    <header>
-        <h1>Welcome to Hraymo</h1>
-    </header>
-
-    <main>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Hraymo is a leading company in innovative solutions, dedicated to transforming industries through our unique approaches and cutting-edge technology.</p>
-        </section>
-
-        <section id="careers">
-            <h2>Careers</h2>
-            <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
-            <p>Email: hr@hraymo.com</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: contact@hraymo.com</p>
-        </section>
-
-        <!-- Интерактивный слот -->
-        <section id="slot-machine">
-            <div class="slot-machine">
-                <div class="reels">
-                    <div class="reel-container" id="reel1-container">
-                        <!-- Создаем зацикленную ленту -->
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                    </div>
-                    <div class="reel-container" id="reel2-container">
-                        <!-- Создаем зацикленную ленту -->
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                    </div>
-                    <div class="reel-container" id="reel3-container">
-                        <!-- Создаем зацикленную ленту -->
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                        <div class="reel">🍒</div>
-                        <div class="reel">🍋</div>
-                        <div class="reel">🍊</div>
-                        <div class="reel">🍉</div>
-                        <div class="reel">🍇</div>
-                        <div class="reel">⭐</div>
-                        <div class="reel">💎</div>
-                    </div>
-                </div>
-                <button class="spin-button" onclick="spin()">Spin</button>
-                <p id="result"></p>
-            </div>
-        </section>
-    </main>
 
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
 
         function spin() {
-            const reels = document.querySelectorAll('.reel-container');
-            reels.forEach((reelContainer) => {
-                // Сброс анимации для перезапуска
-                reelContainer.style.animation = 'none';
-                reelContainer.offsetHeight; // Принудительная перерисовка
-                reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
-            });
+            const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
+            const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
+            const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
 
-            setTimeout(() => {
-                const results = [];
-                document.querySelectorAll('.reel-container').forEach((reelContainer) => {
-                    const visibleReel = reelContainer.querySelector('.reel');
-                    results.push(visibleReel.innerText);
-                });
+            document.getElementById('reel1').innerText = reel1;
+            document.getElementById('reel2').innerText = reel2;
+            document.getElementById('reel3').innerText = reel3;
 
-                // Проверка, все ли видимые символы одинаковы
-                if (results.every(symbol => symbol === results[0])) {
-                    document.getElementById('result').innerText = "🎉 You win! 🎉";
-                } else {
-                    document.getElementById('result').innerText = "Try again!";
-                }
-
-                // Обновление символов после вращения
-                updateReels();
-            }, 1500); // Продолжительность анимации вращения
-        }
-
-        function updateReels() {
-            document.querySelectorAll('.reel-container').forEach((reelContainer) => {
-                const reels = reelContainer.querySelectorAll('.reel');
-                const randomStart = Math.floor(Math.random() * symbols.length);
-
-                // Обновление каждого барабана случайным символом
-                reels.forEach((reel, index) => {
-                    reel.innerText = symbols[(index + randomStart) % symbols.length];
-                });
-
-                // Сброс анимации для перезапуска
-                reelContainer.style.animation = 'none';
-                reelContainer.offsetHeight; // Принудительная перерисовка
-                reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
-            });
+            if (reel1 === reel2 && reel2 === reel3) {
+                document.getElementById('result').innerText = "🎉 You win! 🎉";
+            } else {
+                document.getElementById('result').innerText = "Try again!";
+            }
         }
     </script>
+
 </body>
 </html>
