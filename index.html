@@ -21,21 +21,6 @@
             text-align: center;
         }
 
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 10px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-        }
-
         main {
             padding: 20px;
         }
@@ -70,7 +55,7 @@
             margin-bottom: 20px;
             overflow: hidden;
             position: relative;
-            height: 100px; /* Adjust based on the height of the reels */
+            height: 180px; /* Adjust based on the height of the reels */
         }
 
         .reel-container {
@@ -79,8 +64,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            height: 100%;
-            animation: spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+            height: 600px; /* Height enough to include all symbols */
         }
 
         .reel {
@@ -112,7 +96,11 @@
 
         @keyframes spin {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-300%); } /* Adjust to match the number of symbols */
+            100% { transform: translateY(-300px); } /* Adjust to match the height of the container */
+        }
+
+        .spinning {
+            animation: spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
         }
     </style>
 </head>
@@ -158,40 +146,34 @@
         </section>
     </main>
 
+    <footer>
+        <p>&copy; 2024 Hraymo. All rights reserved.</p>
+    </footer>
+
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
 
         function spin() {
             const reelContainer = document.querySelector('.reel-container');
             // Reset animation
-            reelContainer.style.animation = 'none';
-            reelContainer.offsetHeight; // Trigger reflow
-            reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
+            reelContainer.classList.remove('spinning');
+            void reelContainer.offsetWidth; // Trigger reflow
+            reelContainer.classList.add('spinning');
 
             setTimeout(() => {
-                reelContainer.style.animation = 'none';
-                const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel4 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel5 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel6 = symbols[Math.floor(Math.random() * symbols.length)];
-                const reel7 = symbols[Math.floor(Math.random() * symbols.length)];
+                reelContainer.classList.remove('spinning');
+                const reels = document.querySelectorAll('.reel');
+                reels.forEach(reel => {
+                    reel.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+                });
 
-                document.querySelectorAll('.reel')[0].innerText = reel1;
-                document.querySelectorAll('.reel')[1].innerText = reel2;
-                document.querySelectorAll('.reel')[2].innerText = reel3;
-                document.querySelectorAll('.reel')[3].innerText = reel4;
-                document.querySelectorAll('.reel')[4].innerText = reel5;
-                document.querySelectorAll('.reel')[5].innerText = reel6;
-                document.querySelectorAll('.reel')[6].innerText = reel7;
-
-                if (reel1 === reel2 && reel2 === reel3) {
+                // Check for a win (for demonstration purposes, checking the first three reels)
+                if (reels[0].innerText === reels[1].innerText && reels[1].innerText === reels[2].innerText) {
                     document.getElementById('result').innerText = "🎉 You win! 🎉";
                 } else {
                     document.getElementById('result').innerText = "Try again!";
                 }
-            }, 1500);
+            }, 1500); // Matches the duration of the animation
         }
     </script>
 </body>
