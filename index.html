@@ -9,31 +9,37 @@
 <body>
     <header>
         <h1>Welcome to Hraymo</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#careers">Careers</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <section id="about">
             <h2>About Us</h2>
-            <p>At Hraymo, we create games for the global gaming industry with our unique approach to product development.
-            Our goal is to provide users with positive emotions and unforgettable experiences.
-            We believe in the power of innovation and fun, and these values are reflected in every game we create.</p>
+            <p>Hraymo is a leading company in innovative solutions, dedicated to transforming industries through our unique approaches and cutting-edge technology.</p>
         </section>
 
         <section id="careers">
             <h2>Careers</h2>
             <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
-            <p>Email: hr@hraymo.com</p>
         </section>
 
         <section id="contact">
             <h2>Contact Us</h2>
-            <p>Email: contact@hraymo.com</p>
-
+            <p>Email: info@hraymo.com</p>
+            <p>Phone: +1 123 456 7890</p>
+            <p>Address: 123 Innovation Drive, Tech City, Country</p>
         </section>
     </main>
 
     <!-- Интерактивный слот -->
     <section id="slot-machine">
+        <h2>Try Your Luck!</h2>
         <div class="slot-machine">
             <div class="reels">
                 <div class="reel" id="reel1">🍒</div>
@@ -44,6 +50,10 @@
             <p id="result"></p>
         </div>
     </section>
+
+    <footer>
+        <p>&copy; 2024 Hraymo. All rights reserved.</p>
+    </footer>
 
     <!-- Стили и скрипты для слота -->
     <style>
@@ -105,6 +115,12 @@
             margin: 0 auto;
         }
 
+        .reels {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
         .reel {
             display: inline-block;
             width: 60px;
@@ -130,27 +146,48 @@
         .spin-button:hover {
             background-color: #218838;
         }
+
+        /* Эффект вращения */
+        @keyframes spin {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-200%); }
+        }
+
+        .reel.spin {
+            animation: spin 1s cubic-bezier(0.33, 1, 0.68, 1) infinite;
+        }
     </style>
 
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
 
         function spin() {
-            const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
-            const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
-            const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
+            // Добавление анимации вращения
+            document.getElementById('reel1').classList.add('spin');
+            document.getElementById('reel2').classList.add('spin');
+            document.getElementById('reel3').classList.add('spin');
 
-            document.getElementById('reel1').innerText = reel1;
-            document.getElementById('reel2').innerText = reel2;
-            document.getElementById('reel3').innerText = reel3;
+            // Остановка анимации через 1.5 секунды
+            setTimeout(() => {
+                document.getElementById('reel1').classList.remove('spin');
+                document.getElementById('reel2').classList.remove('spin');
+                document.getElementById('reel3').classList.remove('spin');
 
-            if (reel1 === reel2 && reel2 === reel3) {
-                document.getElementById('result').innerText = "🎉 You win! 🎉";
-            } else {
-                document.getElementById('result').innerText = "Try again!";
-            }
+                const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
+
+                document.getElementById('reel1').innerText = reel1;
+                document.getElementById('reel2').innerText = reel2;
+                document.getElementById('reel3').innerText = reel3;
+
+                if (reel1 === reel2 && reel2 === reel3) {
+                    document.getElementById('result').innerText = "🎉 You win! 🎉";
+                } else {
+                    document.getElementById('result').innerText = "Try again!";
+                }
+            }, 1500);
         }
     </script>
-
 </body>
 </html>
