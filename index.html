@@ -5,45 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hraymo</title>
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Welcome to Hraymo</h1>
-    </header>
-
-    <main>
-        <section id="about">
-            <h2>About Us</h2>
-            <p>Hraymo is a leading company in innovative solutions, dedicated to transforming industries through our unique approaches and cutting-edge technology.</p>
-        </section>
-
-        <section id="careers">
-            <h2>Careers</h2>
-            <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
-            <p>Email: hr@hraymo.com</p>
-        </section>
-
-        <section id="contact">
-            <h2>Contact Us</h2>
-            <p>Email: contact@hraymo.com</p>
-        </section>
-    </main>
-
-    <!-- Интерактивный слот -->
-    <section id="slot-machine">
-        <h2>Try Your Luck!</h2>
-        <div class="slot-machine">
-            <div class="reels">
-                <div class="reel" id="reel1">🍒</div>
-                <div class="reel" id="reel2">🍋</div>
-                <div class="reel" id="reel3">🍊</div>
-            </div>
-            <button class="spin-button" onclick="spin()">Spin</button>
-            <p id="result"></p>
-        </div>
-    </section>
-
-    <!-- Стили и скрипты для слота -->
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -107,6 +68,19 @@
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 100px; /* Adjust based on the height of the reels */
+        }
+
+        .reel-container {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            animation: spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards;
         }
 
         .reel {
@@ -118,6 +92,7 @@
             font-size: 24px;
             line-height: 60px;
             background-color: #fff;
+            text-align: center;
         }
 
         .spin-button {
@@ -135,39 +110,86 @@
             background-color: #218838;
         }
 
-        /* Эффект вращения */
         @keyframes spin {
             0% { transform: translateY(0); }
-            100% { transform: translateY(-200%); }
-        }
-
-        .reel.spin {
-            animation: spin 1s cubic-bezier(0.33, 1, 0.68, 1) infinite;
+            100% { transform: translateY(-300%); } /* Adjust to match the number of symbols */
         }
     </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Hraymo</h1>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Hraymo is a leading company in innovative solutions, dedicated to transforming industries through our unique approaches and cutting-edge technology.</p>
+        </section>
+
+        <section id="careers">
+            <h2>Careers</h2>
+            <p>Join our team of forward-thinking professionals. Explore opportunities to advance your career in a dynamic and innovative environment.</p>
+            <p>Email: hr@hraymo.com</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@hraymo.com</p>
+        </section>
+
+        <!-- Интерактивный слот -->
+        <section id="slot-machine">
+            <h2>Try Your Luck!</h2>
+            <div class="slot-machine">
+                <div class="reels">
+                    <div class="reel-container">
+                        <div class="reel">🍒</div>
+                        <div class="reel">🍋</div>
+                        <div class="reel">🍊</div>
+                        <div class="reel">🍉</div>
+                        <div class="reel">🍇</div>
+                        <div class="reel">⭐</div>
+                        <div class="reel">💎</div>
+                    </div>
+                </div>
+                <button class="spin-button" onclick="spin()">Spin</button>
+                <p id="result"></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Hraymo. All rights reserved.</p>
+    </footer>
 
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
 
         function spin() {
-            // Добавление анимации вращения
-            document.getElementById('reel1').classList.add('spin');
-            document.getElementById('reel2').classList.add('spin');
-            document.getElementById('reel3').classList.add('spin');
+            const reelContainer = document.querySelector('.reel-container');
+            // Reset animation
+            reelContainer.style.animation = 'none';
+            reelContainer.offsetHeight; // Trigger reflow
+            reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
 
-            // Остановка анимации через 1.5 секунды
             setTimeout(() => {
-                document.getElementById('reel1').classList.remove('spin');
-                document.getElementById('reel2').classList.remove('spin');
-                document.getElementById('reel3').classList.remove('spin');
-
+                reelContainer.style.animation = 'none';
                 const reel1 = symbols[Math.floor(Math.random() * symbols.length)];
                 const reel2 = symbols[Math.floor(Math.random() * symbols.length)];
                 const reel3 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel4 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel5 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel6 = symbols[Math.floor(Math.random() * symbols.length)];
+                const reel7 = symbols[Math.floor(Math.random() * symbols.length)];
 
-                document.getElementById('reel1').innerText = reel1;
-                document.getElementById('reel2').innerText = reel2;
-                document.getElementById('reel3').innerText = reel3;
+                document.querySelectorAll('.reel')[0].innerText = reel1;
+                document.querySelectorAll('.reel')[1].innerText = reel2;
+                document.querySelectorAll('.reel')[2].innerText = reel3;
+                document.querySelectorAll('.reel')[3].innerText = reel4;
+                document.querySelectorAll('.reel')[4].innerText = reel5;
+                document.querySelectorAll('.reel')[5].innerText = reel6;
+                document.querySelectorAll('.reel')[6].innerText = reel7;
 
                 if (reel1 === reel2 && reel2 === reel3) {
                     document.getElementById('result').innerText = "🎉 You win! 🎉";
