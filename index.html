@@ -63,6 +63,8 @@
             flex-direction: column;
             height: 100%;
             width: 60px; /* Ширина барабана */
+            overflow: hidden;
+            position: relative;
         }
 
         .reel {
@@ -74,6 +76,8 @@
             background-color: #fff;
             font-size: 24px;
             text-align: center;
+            position: absolute;
+            top: 0;
             transition: transform 1.5s cubic-bezier(0.33, 1, 0.68, 1);
         }
 
@@ -90,6 +94,15 @@
 
         .spin-button:hover {
             background-color: #218838;
+        }
+
+        @keyframes spin {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-560px); /* Высота барабана * количество символов */
+            }
         }
     </style>
 </head>
@@ -155,26 +168,22 @@
 
     <script>
         const symbols = ['🍒', '🍋', '🍊', '🍉', '🍇', '⭐', '💎'];
-        let currentSymbols = [];
 
         function spin() {
             const reels = document.querySelectorAll('.reel-container');
-            reels.forEach((reelContainer) => {
-                const reels = reelContainer.querySelectorAll('.reel');
-                const randomStart = Math.floor(Math.random() * (reels.length - 3));
-
-                // Set the starting position of the reels
-                reels.forEach((reel, index) => {
-                    reel.style.transform = `translateY(${-randomStart * 80}px)`; // Adjust translateY based on reel height
-                });
-
-                // Trigger the spin animation
-                reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
+            reels.forEach((reelContainer, index) => {
+                // Animate only the vertical position
+                reelContainer.style.animation = `spin 1.5s cubic-bezier(0.33, 1, 0.68, 1)`;
+                // Reset animation
+                reelContainer.style.animation = 'none';
+                reelContainer.offsetHeight; // Trigger reflow
+                // Add animation
+                reelContainer.style.animation = `spin 1.5s cubic-bezier(0.33, 1, 0.68, 1)`;
             });
 
             setTimeout(() => {
                 const results = [];
-                document.querySelectorAll('.reel-container').forEach((reelContainer, index) => {
+                document.querySelectorAll('.reel-container').forEach((reelContainer) => {
                     const visibleReel = reelContainer.querySelector('.reel');
                     results.push(visibleReel.innerText);
                 });
@@ -204,7 +213,7 @@
                 // Reset the reel container animation
                 reelContainer.style.animation = 'none';
                 reelContainer.offsetHeight; // Trigger reflow
-                reelContainer.style.animation = 'spin 1.5s cubic-bezier(0.33, 1, 0.68, 1) forwards';
+                reelContainer.style.animation = `spin 1.5s cubic-bezier(0.33, 1, 0.68, 1)`;
             });
         }
     </script>
